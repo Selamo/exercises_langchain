@@ -64,7 +64,7 @@ def load_embeddings():
         model= "models/text-embedding-004",
         google_api_key=os.getenv("GOOGLE_API_KEY")
     )
-    print("embeddings", embeddings)
+    # print("embeddings", embeddings)
     # Test with sample text
     # Embeddings work by converting text to numerical representations(vectors) that cap
     #that meaning
@@ -81,7 +81,7 @@ def load_embeddings():
     # Generate embeddings for multiple texts at once
     # This is more efficient than generating them one by one
 
-    embedded_docs= embeddings.embed_documents(sample_text)
+    # embedded_docs= embeddings.embed_documents(sample_text)
     # print(embedded_docs)
     return embeddings
 
