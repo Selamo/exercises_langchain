@@ -1,5 +1,6 @@
 import streamlit as st
-from config import load_google_llm, newsContext
+# from config import load_google_llm, newsContext
+from config.setting import load_google_llm, newsContext
 from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import PydanticOutputParser
 from pydantic import BaseModel
@@ -7,33 +8,29 @@ from firebase_admin import credentials, firestore
 import firebase_admin
 import os
 import datetime
-import json
 from typing import List, Optional
+import sys
 
-# ------------------------------- 
-# Firebase Setup
-# ------------------------------- 
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 script_dir = os.path.dirname(__file__)
 key_path = os.path.join(script_dir, "serviceAccountKey.json")
 
-if not firebase_admin._apps:  # Prevent reinitialization
+if not firebase_admin._apps:  
     cred = credentials.Certificate(key_path)
     firebase_admin.initialize_app(cred)
 
 db = firestore.client()
 llm = load_google_llm()
 
-# ------------------------------- 
-# Pydantic Models
-# ------------------------------- 
+
 class News(BaseModel):
     title: str
     article: str
     ai_summary: str
     sentiment_analysis: str
     key_topics: str
-    credibility_assessment: str  # Fixed spelling
-    pidgin_version: str
+    credibility_assessment: str  
+    pidgin_version: st
     timestamp: Optional[str] = None
     country: Optional[str] = None
     confidence_score: Optional[float] = None
@@ -201,9 +198,6 @@ def load_css():
     </style>
     """, unsafe_allow_html=True)
 
-# ------------------------------- 
-# Helper Functions
-# ------------------------------- 
 def get_sentiment_color(sentiment):
     sentiment_lower = sentiment.lower()
     if 'positive' in sentiment_lower:

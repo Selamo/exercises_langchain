@@ -28,7 +28,7 @@ text_splitter=CharacterTextSplitter(
 page_contents =[doc.page_content for doc in load_data]
 text1=text_splitter.create_documents(page_contents)
 
-# to get metadata, use split_documents instead
+# to get metadata, use split_documents instead.
 text = text_splitter.split_documents(load_data)
 
 # print(text[0],"\n\n",text1[0])

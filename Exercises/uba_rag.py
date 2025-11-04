@@ -4,9 +4,6 @@ from langchain_text_splitters import CharacterTextSplitter
 from langchain_community.vectorstores import Chroma 
 from config import load_embeddings, load_google_llm  
 
-# -------------------------------
-# Load Data and Build Vector Store
-# -------------------------------
 embeddings = load_embeddings()  
 
 # PDF 
@@ -47,9 +44,7 @@ print(f"✅ Total number of chunks after combining: {len(chunks)}")
 vector_db = Chroma.from_documents(chunks, embeddings, persist_directory="./chroma_uba") 
 retriever = vector_db.as_retriever(search_kwargs={"k": 3})  
 
-# -------------------------------
-# Helper Functions
-# -------------------------------
+
 def is_uba_question(question: str) -> bool:     
     keywords = [         
         "bamenda", "university of bamenda", "uba", "uniba",         
@@ -84,9 +79,6 @@ def answer_question(question: str):
 
     return f"{response}"   
 
-# -------------------------------
-# Streamlit UI
-# -------------------------------
 def main():
     st.title("🤖 University of Bamenda AI Assistant")
     st.write("Ask me anything about the University of Bamenda!")

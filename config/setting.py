@@ -103,7 +103,7 @@ class NewsAPILoader:
     def load(self):
             # we need to pass some information to our url like the city and api_key
         # url=f"https://newsdata.io/api/1/news?q={}apikey={self.api_key}&country={self.country} &language=en"
-        url=f"https://newsdata.io/api/1/latest?q={self.query}&apikey={self.api_key}"
+        url=f"https://newsdata.io/api/1/latest?q={self.query}&apikey={self.api_key}&has_image=true"
         response=requests.get(url).json()
         return response
 
